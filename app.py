@@ -3,14 +3,9 @@ import json
 import time
 import twitter
 
-LATITUDE = "33.172584"
-LONGITUDE = "-96.665638"
-RADIUS = "1mi"  # mi=miles; km=kilometers
 HASHTAG = "%23avianaart"
-QUERY = f'q={HASHTAG}&geocode=({LATITUDE},{LONGITUDE},{RADIUS})&count=1'
 QUERY = f'q={HASHTAG}&result_type=recent&since_id='  # &geocode=({LATITUDE},{LONGITUDE},{RADIUS})&count=1'
-#QUERY = 'q=%23avianaart%20near%3A"3011%20chukar%20dr%2C%20mckinney%2C%20tx"%20within%3A15mi'
-PINS = [11, 13, 15, 16]
+PINS = [11, 13, 15, 16]  # physical locations on the GPIO strip
 
 def setup_gpio(pins: list):
   """
@@ -105,9 +100,12 @@ def main(args):
     while True:
       results = search_twitter(api, last_id)
       if len(results) > 0:
-        print(results[0].text)
+        # print(results[0].text)
         last_id = results[0].id_str
         log_tweet(results[0])
+        lights_on(PINS)
+        time.sleep(60)
+        lights_off(PINS)
       time.sleep(10)
 
 def xmain(args):
