@@ -24,6 +24,8 @@ def main(args):
     print(f"Droping pin {pin}")
     GPIO.output(pin, GPIO.LOW)
   
+  print("Sleeping another 10 seconds")
+  time.sleep(10)
   print("Cleaning up")
   GPIO.cleanup()
     
