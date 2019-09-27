@@ -75,7 +75,7 @@ def search_twitter(last_date: str):
   return results
 
 
-def main():
+def main(args):
     api = connect_twitter(load_keys())
     setup_gpio(PINS)
     
