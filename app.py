@@ -90,7 +90,7 @@ def search_twitter(api, last_id: str):
 
 
 def log_tweet(tweet: dict):
-  message = f"{tweet.created_at} - {tweet.name} at {tweet.location}"
+  message = f"{tweet.created_at} - {tweet.user.name} at {tweet.user.location}"
   print(message)
 
 
