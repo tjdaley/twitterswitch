@@ -28,6 +28,5 @@ def main(args):
   GPIO.cleanup()
     
   
-  if __name__ == "__main__":
-    main(None)
-  
+if __name__ == "__main__":
+  main(None)
