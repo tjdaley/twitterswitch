@@ -8,6 +8,7 @@ LONGITUDE = "-96.665638"
 RADIUS = "1mi"  # mi=miles; km=kilometers
 HASHTAG = "%23avianaart"
 QUERY = f'q={HASHTAG}&geocode=({LATITUDE},{LONGITUDE},{RADIUS})&count=1'
+QUERY = f'q={HASHTAG}'  # &geocode=({LATITUDE},{LONGITUDE},{RADIUS})&count=1'
 #QUERY = 'q=%23avianaart%20near%3A"3011%20chukar%20dr%2C%20mckinney%2C%20tx"%20within%3A15mi'
 PINS = [11, 13, 15, 16]
 
