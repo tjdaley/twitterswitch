@@ -8,7 +8,7 @@ LONGITUDE = "-96.665638"
 RADIUS = "1mi"  # mi=miles; km=kilometers
 HASHTAG = "%23avianaart"
 QUERY = f'q={HASHTAG}&geocode=({LATITUDE},{LONGITUDE},{RADIUS})&count=1'
-QUERY = f'q={HASHTAG}'  # &geocode=({LATITUDE},{LONGITUDE},{RADIUS})&count=1'
+QUERY = f'q={HASHTAG}&result_type=recent&since_id='  # &geocode=({LATITUDE},{LONGITUDE},{RADIUS})&count=1'
 #QUERY = 'q=%23avianaart%20near%3A"3011%20chukar%20dr%2C%20mckinney%2C%20tx"%20within%3A15mi'
 PINS = [11, 13, 15, 16]
 
@@ -78,10 +78,10 @@ def connect_twitter(config):
   return api
 
 
-def search_twitter(api, last_date: str):
+def search_twitter(api, last_id: str):
   results = None
   try:
-    results = api.GetSearch(raw_query=QUERY)
+    results = api.GetSearch(raw_query=QUERY+last_id)
   except twitter.error.TwitterError as e:
     print(str(e))
     print(QUERY)
@@ -93,12 +93,14 @@ def main(args):
     api = connect_twitter(load_keys())
     setup_gpio(PINS)
     
-    last_date = ""
+    last_id = "0"
 
     while True:
-      results = search_twitter(api, last_date)
+      results = search_twitter(api, last_id)
       print(results)
-      time.sleep(30)
+      print("***ID:", results.ID)
+      last_id = results.ID
+      time.sleep(10)
 
 def xmain(args):
   print("Starting . . .")
