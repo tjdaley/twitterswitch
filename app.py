@@ -90,7 +90,7 @@ def search_twitter(api, last_id: str):
 
 
 def log_tweet(tweet: dict):
-  message = f"{tweet['created_at']} - {tweet['name']} at {tweet['location']}"
+  message = f"{tweet.created_at} - {tweet.name} at {tweet.location}"
   print(message)
 
 
@@ -104,7 +104,7 @@ def main(args):
       results = search_twitter(api, last_id)
       if len(results) == 1:
         # print(results[0])
-        last_id = results[0]["id_str"]
+        last_id = results[0].id_str
         log_tweet(results[0])
       time.sleep(10)
 
