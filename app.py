@@ -79,7 +79,7 @@ def connect_twitter(config):
 
 
 def search_twitter(api, last_id: str):
-  results = None
+  results = []
   try:
     results = api.GetSearch(raw_query=QUERY+last_id)
   except twitter.error.TwitterError as e:
@@ -97,9 +97,10 @@ def main(args):
 
     while True:
       results = search_twitter(api, last_id)
-      print(results)
-      print("***ID:", results.ID)
-      last_id = results.ID
+      if len(results) = 1:
+        print(results)
+        print("***ID:", results[0].ID)
+        last_id = results[0].ID
       time.sleep(10)
 
 def xmain(args):
