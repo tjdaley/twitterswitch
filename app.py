@@ -97,7 +97,7 @@ def main(args):
 
     while True:
       results = search_twitter(api, last_id)
-      if len(results) = 1:
+      if len(results) == 1:
         print(results)
         print("***ID:", results[0].ID)
         last_id = results[0].ID
