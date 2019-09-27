@@ -15,14 +15,14 @@ def main(args):
 
   for pin in pins:
     print(f"Raising pin {pin}")
-    GPIO.output(pin, GPIO.HIGH)
+    GPIO.output(pin, GPIO.LOW)
     
   print("Sleeping for 10 seconds")
   time.sleep(10)
   
   for pin in pins:
     print(f"Droping pin {pin}")
-    GPIO.output(pin, GPIO.LOW)
+    GPIO.output(pin, GPIO.HIGH)
   
   print("Sleeping another 10 seconds")
   time.sleep(10)
