@@ -3,8 +3,9 @@ import json
 import time
 import twitter
 
+# TODO: Turn these into command line arguments OR config file parameters
 HASHTAG = "%23avianaart"
-QUERY = f'q={HASHTAG}&result_type=recent&since_id='  # &geocode=({LATITUDE},{LONGITUDE},{RADIUS})&count=1'
+QUERY = f'q={HASHTAG}&result_type=recent&since_id='
 PINS = [11, 13, 15, 16]  # physical locations on the GPIO strip
 
 def setup_gpio(pins: list):
@@ -70,8 +71,8 @@ def connect_twitter(config):
                     sleep_on_rate_limit=True)
 
   verified_credentials = api.VerifyCredentials()
-  print("Screen name:", verified_credentials.screen_name)
-  print("Last Tweet:", verified_credentials.status.text)
+  # print("Screen name:", verified_credentials.screen_name)
+  # print("Last Tweet:", verified_credentials.status.text)
   return api
 
 
@@ -106,36 +107,13 @@ def main(args):
         lights_on(PINS)
         time.sleep(60)
         lights_off(PINS)
-      time.sleep(10)
+      time.sleep(4)
 
-def xmain(args):
-  print("Starting . . .")
-  pins = [11, 13, 15, 16]
-  
-  # Reference channels by physical pin number
-  print("Reference pins by physical board position.")
-  GPIO.setmode(GPIO.BOARD)
-  
-  for pin in pins:
-    print(f"Setting pin {pin} to output mode")
-    GPIO.setup(pin, GPIO.OUT)
-
-  for pin in pins:
-    print(f"Raising pin {pin}")
-    GPIO.output(pin, GPIO.LOW)
-    
-  print("Sleeping for 10 seconds")
-  time.sleep(10)
-  
-  for pin in pins:
-    print(f"Droping pin {pin}")
-    GPIO.output(pin, GPIO.HIGH)
-  
-  print("Sleeping another 10 seconds")
-  time.sleep(10)
-  print("Cleaning up")
-  GPIO.cleanup()
-    
-  
 if __name__ == "__main__":
-  main(None)
+  try:
+    main(None)
+  except Exception as e:
+    print(str(e))
+    
+  cleanup()
+  exit()
