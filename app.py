@@ -103,7 +103,7 @@ def main(args):
     while True:
       results = search_twitter(api, last_id)
       if len(results) == 1:
-        print(results[0])
+        print(results[0].text)
         last_id = results[0].id_str
         log_tweet(results[0])
       time.sleep(10)
