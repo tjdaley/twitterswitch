@@ -3,7 +3,12 @@ import json
 import time
 import twitter
 
-QUERY = 'q=%23avianaart%20near%3A"3011%20chukar%20dr%2C%20mckinney%2C%20tx"%20within%3A15mi&src=typd'
+LATITUDE = "33.172584"
+LONGITUDE = "-96.665638"
+RADIUS = "1mi"  # mi=miles; km=kilometers
+HASHTAG = "#avianaart"
+QUERY = f'q={HASHTAG}&geocode=({LATITUDE},{LONGITUDE},{RADIUS})&src=typd'
+#QUERY = 'q=%23avianaart%20near%3A"3011%20chukar%20dr%2C%20mckinney%2C%20tx"%20within%3A15mi&src=typd'
 PINS = [11, 13, 15, 16]
 
 def setup_gpio(pins: list):
@@ -71,7 +76,13 @@ def connect_twitter(config):
 
 
 def search_twitter(api, last_date: str):
-  results = api.GetSearch(raw_query=QUERY)
+  results = None
+  try:
+    results = api.GetSearch(raw_query=QUERY)
+  except twitter.error.TwitterError as e:
+    print(str(e))
+    print(QUERY)
+
   return results
 
 
