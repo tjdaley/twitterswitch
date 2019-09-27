@@ -72,6 +72,8 @@ def connect_twitter(config):
                     sleep_on_rate_limit=True)
 
   verified_credentials = api.VerifyCredentials()
+  print("Screen name:", verified_credentials.screen_name)
+  print("Last Tweet:", verified_credentials.status.text)
   return api
 
 
