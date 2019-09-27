@@ -70,7 +70,7 @@ def connect_twitter(config):
   return api
 
 
-def search_twitter(last_date: str):
+def search_twitter(api, last_date: str):
   results = api.GetSearch(raw_query=QUERY)
   return results
 
@@ -82,7 +82,7 @@ def main(args):
     last_date = ""
 
     while True:
-      results = search_twitter(last_date)
+      results = search_twitter(api, last_date)
       print(results)
       time.sleep(30)
 
