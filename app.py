@@ -19,6 +19,8 @@ def setup_gpio(pins: list):
   Args:
     pins (list): List of pin numbers connected to the relay board.
   """
+  # Supress warnings
+  GPIO.setwarnings(False)
   
   # Reference channels by physical pin number.
   GPIO.setmode(GPIO.BOARD)
