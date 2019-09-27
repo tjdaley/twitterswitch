@@ -15,7 +15,7 @@ def main(args):
     
   time.sleep(10)
   
-  for in in pins:
+  for pin in pins:
     GPIO.output(pin, GPIO.LOW)
     
   GPIO.cleanup()
