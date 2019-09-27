@@ -89,6 +89,11 @@ def search_twitter(api, last_id: str):
   return results
 
 
+def log_tweet(tweet: dict):
+  message = f"{tweet['created_at']} - {tweet['name']} at {tweet['location']}"
+  print(message)
+
+
 def main(args):
     api = connect_twitter(load_keys())
     setup_gpio(PINS)
@@ -98,9 +103,9 @@ def main(args):
     while True:
       results = search_twitter(api, last_id)
       if len(results) == 1:
-        print(results[0])
-        print("***ID:", results[0].ID)
-        last_id = results[0].ID
+        # print(results[0])
+        last_id = results[0]["id_str"]
+        log_tweet(results[0])
       time.sleep(10)
 
 def xmain(args):
