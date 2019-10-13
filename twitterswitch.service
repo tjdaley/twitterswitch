@@ -1,0 +1,20 @@
+[Unit]
+Description=TwitterSwitch Service
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=Simple
+Environment=CONSUMER_KEY=
+Environment=CONSUMER_SECRET=
+User=pi
+WorkingDirectory=~
+ExecStart=/usr/bin/python3 app_streaming.py
+Restart=on-failure
+RestartSec=30
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=twitterswitch
+
+[Install]
+WantedBy=multi-user.target
