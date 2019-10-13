@@ -4,7 +4,7 @@ Wants=network-online.target
 After=network-online.target
 
 [Service]
-Type=Simple
+Type=simple
 Environment=CONSUMER_KEY=
 Environment=CONSUMER_SECRET=
 User=pi
