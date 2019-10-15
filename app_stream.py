@@ -54,6 +54,21 @@ class LightController(Thread):
             if DEBUG:
                 print("Setup GPIO pin", pin)
 
+        # Flash the lights to indicate that we are up and running.
+        self.flash(count=2)
+
+    def flash(self, count: int=2):
+        """
+        Flash the A/C circuit *count* times.
+        """
+
+        for i in range(count):
+            self.lights_on()
+            time.sleep(2)
+            self.lights_off()
+            time.sleep(2)
+
+
     def lights_on(self):
         """
         Turn the lights on.
