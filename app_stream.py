@@ -63,13 +63,13 @@ class LightController(Thread):
         """
 
         for i in range(count):
-            self.lights_on()
+            self.lights_on(auto_off=False)
             time.sleep(2)
             self.lights_off()
             time.sleep(2)
 
 
-    def lights_on(self):
+    def lights_on(self, auto_off: bool=True):
         """
         Turn the lights on.
         """
@@ -83,8 +83,9 @@ class LightController(Thread):
             if DEBUG:
                 print("LIGHTS ON:", pin)
 
-        off_timer = Timer(LIGHT_ON_DURATION_SECS, self.lights_off)
-        off_timer.start()
+        if auto_off:
+            off_timer = Timer(LIGHT_ON_DURATION_SECS, self.lights_off)
+            off_timer.start()
 
     def lights_off(self):
         """
