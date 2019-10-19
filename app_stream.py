@@ -26,7 +26,9 @@ RULES_URL = "https://api.twitter.com/labs/1/tweets/stream/filter/rules"
 
 # Rules are documented here: https://developer.twitter.com/en/docs/labs/filtered-stream/operators
 RULES = [
-  { 'value': '#avianaart has:images -sucks -ugly -horrible', 'tag': 'avianaart' }
+  { 'value': '#avianaart has:images -sucks -ugly -horrible', 'tag': 'avianaart' },
+  { 'value': '#avianaart -sucks -ugly -horrible', 'tag': 'art-no-images'},
+  { 'value': '@avianaart7 -sucks -ugly -horrible', 'tag': 'art-ats'}
 ]
 
 class LightController(Thread):
@@ -105,8 +107,8 @@ light_controller = LightController(PINS)
 class BearerTokenAuth(AuthBase):
   def __init__(self):
     self.bearer_token_url = "https://api.twitter.com/oauth2/token"
-    self.consumer_key = os.environ["CONSUMER_KEY"]
-    self.consumer_secret = os.environ["CONSUMER_SECRET"]
+    self.consumer_key = CONSUMER_KEY  # os.environ["CONSUMER_KEY"]
+    self.consumer_secret = CONSUMER_SECRET  # os.environ["CONSUMER_SECRET"]
     self.bearer_token = self.get_bearer_token()
 
   def get_bearer_token(self):
